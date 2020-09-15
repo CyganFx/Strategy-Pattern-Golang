@@ -19,7 +19,7 @@ func NewCustomDuck(quackBehaviour Quackable, flyBehaviour Flyable) CustomDuck {
 	return CustomDuck{quackBehaviour, flyBehaviour}
 }
 
-func (customDuck CustomDuck) display() {
+func (customDuck CustomDuck) Display() {
 	fmt.Println("It's a custom duck!")
 }
 
@@ -32,7 +32,7 @@ func NewJetpackedDuck() JetpackedDuck {
 	return JetpackedDuck{NewNormalQuack(), NewFlyRocketPowered()}
 }
 
-func (jetpackedDuck JetpackedDuck) display() {
+func (jetpackedDuck JetpackedDuck) Display() {
 	fmt.Println("It's a jetpacked duck duck!")
 }
 
@@ -45,7 +45,7 @@ func NewRubberDuck() RubberDuck {
 	return RubberDuck{NewSqueakSound(), NewFlyNoWay()}
 }
 
-func (rubberDuck RubberDuck) display() {
+func (rubberDuck RubberDuck) Display() {
 	fmt.Println("It's a rubber duck!")
 }
 
@@ -58,7 +58,7 @@ func NewWoodenDuck() WoodenDuck {
 	return WoodenDuck{NewMutedQuack(), NewFlyNoWay()}
 }
 
-func (woodenDuck WoodenDuck) display() {
+func (woodenDuck WoodenDuck) Display() {
 	fmt.Println("It's a wooden duck!")
 }
 
@@ -124,22 +124,22 @@ func (flyNoWay FlyNoWay) Fly() {
 
 func main() {
 	customDuck := NewCustomDuck(NewNormalQuack(), NewFlyWithWings())
-	customDuck.display()
+	customDuck.Display()
 	customDuck.Fly()
 	customDuck.Quack()
 
 	jetpackDuck := NewJetpackedDuck()
-	jetpackDuck.display()
+	jetpackDuck.Display()
 	jetpackDuck.Fly()
 	jetpackDuck.Quack()
 
 	rubberDuck := NewRubberDuck()
-	rubberDuck.display()
+	rubberDuck.Display()
 	rubberDuck.Fly()
 	rubberDuck.Quack()
 
 	woodenDuck := NewWoodenDuck()
-	woodenDuck.display()
+	woodenDuck.Display()
 	woodenDuck.Fly()
 	woodenDuck.Quack()
 }
