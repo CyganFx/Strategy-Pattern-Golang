@@ -1,6 +1,9 @@
+//Strategy Pattern with Ducks
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Quackable interface {
 	Quack()
@@ -10,39 +13,53 @@ type Flyable interface {
 	Fly()
 }
 
-type CustomDuck struct {
-	Quackable
-	Flyable
+type IDuck interface {
+	PerformQuack()
+	PerformFly()
+	Display()
 }
 
-func NewCustomDuck(quackBehaviour Quackable, flyBehaviour Flyable) CustomDuck {
-	return CustomDuck{quackBehaviour, flyBehaviour}
+//Make it private, as abstract imitation
+type duck struct {
+	IDuck
+	quackable Quackable
+	flyable   Flyable
 }
 
-func (customDuck CustomDuck) Display() {
-	fmt.Println("It's a custom duck!")
+func (duck duck) PerformQuack() {
+	duck.quackable.Quack()
 }
+
+func (duck duck) PerformFly() {
+	duck.flyable.Fly()
+}
+
+func (duck duck) Display() {}
+
+//Ducks:
 
 type JetpackedDuck struct {
-	Quackable
-	Flyable
+	duck duck
 }
 
-func NewJetpackedDuck() JetpackedDuck {
-	return JetpackedDuck{NewNormalQuack(), NewFlyRocketPowered()}
+func (jetpackedDuck *JetpackedDuck) NewJetpackedDuck() *JetpackedDuck {
+	jetpackedDuck.duck.quackable = NewNormalQuack()
+	jetpackedDuck.duck.flyable = NewFlyRocketPowered()
+	return jetpackedDuck
 }
 
 func (jetpackedDuck JetpackedDuck) Display() {
-	fmt.Println("It's a jetpacked duck duck!")
+	fmt.Println("It's a jetpacked duck!")
 }
 
 type RubberDuck struct {
-	Quackable
-	Flyable
+	duck duck
 }
 
-func NewRubberDuck() RubberDuck {
-	return RubberDuck{NewSqueakSound(), NewFlyNoWay()}
+func (rubberDuck *RubberDuck) NewRubberDuck() *RubberDuck {
+	rubberDuck.duck.quackable = NewSqueakSound()
+	rubberDuck.duck.flyable = NewFlyNoWay()
+	return rubberDuck
 }
 
 func (rubberDuck RubberDuck) Display() {
@@ -50,17 +67,20 @@ func (rubberDuck RubberDuck) Display() {
 }
 
 type WoodenDuck struct {
-	Quackable
-	Flyable
+	duck duck
 }
 
-func NewWoodenDuck() WoodenDuck {
-	return WoodenDuck{NewMutedQuack(), NewFlyNoWay()}
+func (woodenDuck *WoodenDuck) NewWoodenDuck() *WoodenDuck {
+	woodenDuck.duck.quackable = NewMutedQuack()
+	woodenDuck.duck.flyable = NewFlyNoWay()
+	return woodenDuck
 }
 
 func (woodenDuck WoodenDuck) Display() {
 	fmt.Println("It's a wooden duck!")
 }
+
+//Quack Behaviour Implementation:
 
 type NormalQuack struct{}
 
@@ -92,15 +112,7 @@ func (mutedQuack MutedQuack) Quack() {
 	fmt.Println("...")
 }
 
-type FlyWithWings struct{}
-
-func NewFlyWithWings() Flyable {
-	return FlyWithWings{}
-}
-
-func (flyWithWings FlyWithWings) Fly() {
-	fmt.Println("Flying with wings!")
-}
+//Fly Behaviour Implementation:
 
 type FlyRocketPowered struct{}
 
@@ -123,23 +135,21 @@ func (flyNoWay FlyNoWay) Fly() {
 }
 
 func main() {
-	customDuck := NewCustomDuck(NewNormalQuack(), NewFlyWithWings())
-	customDuck.Display()
-	customDuck.Fly()
-	customDuck.Quack()
-
-	jetpackDuck := NewJetpackedDuck()
+	jetpackDuck := JetpackedDuck{}
+	jetpackDuck.NewJetpackedDuck()
 	jetpackDuck.Display()
-	jetpackDuck.Fly()
-	jetpackDuck.Quack()
+	jetpackDuck.duck.PerformQuack()
+	jetpackDuck.duck.PerformFly()
 
-	rubberDuck := NewRubberDuck()
+	rubberDuck := RubberDuck{}
+	rubberDuck.NewRubberDuck()
 	rubberDuck.Display()
-	rubberDuck.Fly()
-	rubberDuck.Quack()
+	rubberDuck.duck.PerformQuack()
+	rubberDuck.duck.PerformFly()
 
-	woodenDuck := NewWoodenDuck()
+	woodenDuck := WoodenDuck{}
+	woodenDuck.NewWoodenDuck()
 	woodenDuck.Display()
-	woodenDuck.Fly()
-	woodenDuck.Quack()
+	woodenDuck.duck.PerformQuack()
+	woodenDuck.duck.PerformFly()
 }
