@@ -26,6 +26,14 @@ type duck struct {
 	flyable   Flyable
 }
 
+func (duck *duck) SetFlyBehaviour(flyable Flyable) {
+	duck.flyable = flyable
+}
+
+func (duck *duck) SetQuackBehaviour(quackable Quackable) {
+	duck.quackable = quackable
+}
+
 func (duck duck) PerformQuack() {
 	duck.quackable.Quack()
 }
@@ -114,6 +122,16 @@ func (mutedQuack MutedQuack) Quack() {
 
 //Fly Behaviour Implementation:
 
+type FlyWithWings struct{}
+
+func NewFlyWithWings() Flyable {
+	return FlyWithWings{}
+}
+
+func (flyWithWings FlyWithWings) Fly() {
+	fmt.Println("Flying with wings!")
+}
+
 type FlyRocketPowered struct{}
 
 func NewFlyRocketPowered() Flyable {
@@ -138,6 +156,12 @@ func main() {
 	jetpackDuck := JetpackedDuck{}
 	jetpackDuck.NewJetpackedDuck()
 	jetpackDuck.Display()
+	jetpackDuck.duck.PerformQuack()
+	jetpackDuck.duck.PerformFly()
+
+	jetpackDuck.duck.SetFlyBehaviour(NewFlyWithWings())
+	jetpackDuck.duck.SetQuackBehaviour(NewMutedQuack())
+
 	jetpackDuck.duck.PerformQuack()
 	jetpackDuck.duck.PerformFly()
 
