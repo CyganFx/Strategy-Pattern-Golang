@@ -50,10 +50,8 @@ type JetpackedDuck struct {
 	duck duck
 }
 
-func (jetpackedDuck *JetpackedDuck) NewJetpackedDuck() *JetpackedDuck {
-	jetpackedDuck.duck.quackable = NewNormalQuack()
-	jetpackedDuck.duck.flyable = NewFlyRocketPowered()
-	return jetpackedDuck
+func NewJetpackedDuck() *JetpackedDuck {
+	return &JetpackedDuck{duck: duck{quackable: NewNormalQuack(), flyable: NewFlyRocketPowered()}}
 }
 
 func (jetpackedDuck JetpackedDuck) Display() {
@@ -64,10 +62,8 @@ type RubberDuck struct {
 	duck duck
 }
 
-func (rubberDuck *RubberDuck) NewRubberDuck() *RubberDuck {
-	rubberDuck.duck.quackable = NewSqueakSound()
-	rubberDuck.duck.flyable = NewFlyNoWay()
-	return rubberDuck
+func NewRubberDuck() *RubberDuck {
+	return &RubberDuck{duck: duck{quackable: NewSqueakSound(), flyable: NewFlyNoWay()}}
 }
 
 func (rubberDuck RubberDuck) Display() {
@@ -78,10 +74,8 @@ type WoodenDuck struct {
 	duck duck
 }
 
-func (woodenDuck *WoodenDuck) NewWoodenDuck() *WoodenDuck {
-	woodenDuck.duck.quackable = NewMutedQuack()
-	woodenDuck.duck.flyable = NewFlyNoWay()
-	return woodenDuck
+func NewWoodenDuck() *WoodenDuck {
+	return &WoodenDuck{duck: duck{quackable: NewMutedQuack(), flyable: NewFlyNoWay()}}
 }
 
 func (woodenDuck WoodenDuck) Display() {
@@ -153,8 +147,7 @@ func (flyNoWay FlyNoWay) Fly() {
 }
 
 func main() {
-	jetpackDuck := JetpackedDuck{}
-	jetpackDuck.NewJetpackedDuck()
+	jetpackDuck := NewJetpackedDuck()
 	jetpackDuck.Display()
 	jetpackDuck.duck.PerformQuack()
 	jetpackDuck.duck.PerformFly()
@@ -165,14 +158,12 @@ func main() {
 	jetpackDuck.duck.PerformQuack()
 	jetpackDuck.duck.PerformFly()
 
-	rubberDuck := RubberDuck{}
-	rubberDuck.NewRubberDuck()
+	rubberDuck := NewRubberDuck()
 	rubberDuck.Display()
 	rubberDuck.duck.PerformQuack()
 	rubberDuck.duck.PerformFly()
 
-	woodenDuck := WoodenDuck{}
-	woodenDuck.NewWoodenDuck()
+	woodenDuck := NewWoodenDuck()
 	woodenDuck.Display()
 	woodenDuck.duck.PerformQuack()
 	woodenDuck.duck.PerformFly()
