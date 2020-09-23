@@ -26,23 +26,23 @@ type duck struct {
 	flyable   Flyable
 }
 
-func (duck *duck) SetFlyBehaviour(flyable Flyable) {
-	duck.flyable = flyable
+func (d *duck) SetFlyBehaviour(flyable Flyable) {
+	d.flyable = flyable
 }
 
-func (duck *duck) SetQuackBehaviour(quackable Quackable) {
-	duck.quackable = quackable
+func (d *duck) SetQuackBehaviour(quackable Quackable) {
+	d.quackable = quackable
 }
 
-func (duck duck) PerformQuack() {
-	duck.quackable.Quack()
+func (d duck) PerformQuack() {
+	d.quackable.Quack()
 }
 
-func (duck duck) PerformFly() {
-	duck.flyable.Fly()
+func (d duck) PerformFly() {
+	d.flyable.Fly()
 }
 
-func (duck duck) Display() {}
+func (d duck) Display() {}
 
 //Ducks:
 
@@ -54,7 +54,7 @@ func NewJetpackedDuck() *JetpackedDuck {
 	return &JetpackedDuck{duck: duck{quackable: NewNormalQuack(), flyable: NewFlyRocketPowered()}}
 }
 
-func (jetpackedDuck JetpackedDuck) Display() {
+func (jd JetpackedDuck) Display() {
 	fmt.Println("It's a jetpacked duck!")
 }
 
@@ -66,7 +66,7 @@ func NewRubberDuck() *RubberDuck {
 	return &RubberDuck{duck: duck{quackable: NewSqueakSound(), flyable: NewFlyNoWay()}}
 }
 
-func (rubberDuck RubberDuck) Display() {
+func (rd RubberDuck) Display() {
 	fmt.Println("It's a rubber duck!")
 }
 
@@ -78,7 +78,7 @@ func NewWoodenDuck() *WoodenDuck {
 	return &WoodenDuck{duck: duck{quackable: NewMutedQuack(), flyable: NewFlyNoWay()}}
 }
 
-func (woodenDuck WoodenDuck) Display() {
+func (wd WoodenDuck) Display() {
 	fmt.Println("It's a wooden duck!")
 }
 
@@ -90,7 +90,7 @@ func NewNormalQuack() Quackable {
 	return NormalQuack{}
 }
 
-func (normalQuack NormalQuack) Quack() {
+func (nq NormalQuack) Quack() {
 	fmt.Println("Quack!")
 }
 
@@ -100,7 +100,7 @@ func NewSqueakSound() Quackable {
 	return SqueakSound{}
 }
 
-func (squeakSound SqueakSound) Quack() {
+func (ss SqueakSound) Quack() {
 	fmt.Println("Squeak!")
 }
 
@@ -110,7 +110,7 @@ func NewMutedQuack() Quackable {
 	return MutedQuack{}
 }
 
-func (mutedQuack MutedQuack) Quack() {
+func (mq MutedQuack) Quack() {
 	fmt.Println("...")
 }
 
@@ -122,7 +122,7 @@ func NewFlyWithWings() Flyable {
 	return FlyWithWings{}
 }
 
-func (flyWithWings FlyWithWings) Fly() {
+func (fww FlyWithWings) Fly() {
 	fmt.Println("Flying with wings!")
 }
 
@@ -132,7 +132,7 @@ func NewFlyRocketPowered() Flyable {
 	return FlyRocketPowered{}
 }
 
-func (flyRocketPowered FlyRocketPowered) Fly() {
+func (frp FlyRocketPowered) Fly() {
 	fmt.Println("Flying with rocket power!")
 }
 
@@ -142,7 +142,7 @@ func NewFlyNoWay() Flyable {
 	return FlyNoWay{}
 }
 
-func (flyNoWay FlyNoWay) Fly() {
+func (fnw FlyNoWay) Fly() {
 	fmt.Println("Not flying, sorry!")
 }
 
